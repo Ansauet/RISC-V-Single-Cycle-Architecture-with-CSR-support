@@ -1,0 +1,17 @@
+module lwpostint (
+    input logic [31;0] rdata1,
+    input logic [31:0] sign_extended_imm,
+    input logic [6:0] opcode,
+    input logic [2:0] func3,
+    input logic [6:0] func7,
+    output logic post_inc_en,
+    output logic [31:0] post_inc_data
+
+
+);
+always_comb begin
+    post_inc_en   = (opcode == 7'b0101011 && func3 == 3'b000);  // Custom lwpostinc enable condition
+    post_inc_data = rdata1 + sign_extended_imm;               // Increment rs1 by immediate value
+);
+
+  end
